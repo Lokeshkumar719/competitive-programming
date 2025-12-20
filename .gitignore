@@ -1,0 +1,11 @@
+# Editor folders
+.vscode/
+.idea/
+.cph/
+
+# OS files
+.DS_Store
+
+# Compiled files
+*.out
+*.exe
