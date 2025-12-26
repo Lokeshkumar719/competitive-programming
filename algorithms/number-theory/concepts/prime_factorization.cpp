@@ -3,6 +3,7 @@ using namespace std;
 #define int long long
 #define endl '\n'
 #define fastio ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+
 // as first factor(except 1) is always prime for n>1
 // T.C=O(root n+logn)
 vector<int> primeFactorization(int n){
@@ -19,6 +20,7 @@ vector<int> primeFactorization(int n){
     primeFactors.push_back(n);
   return primeFactors;
 }
+
 int32_t main() {
   fastio;
   int n;
