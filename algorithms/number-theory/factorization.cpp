@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long int ll;
+using ll = long long;
+// T.C=O(root n)
 vector<ll> findFactors(ll n){
   vector<ll>factors;
   for(ll d=1;d*d<=n;d++){
