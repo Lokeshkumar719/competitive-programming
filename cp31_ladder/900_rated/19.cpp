@@ -27,9 +27,6 @@ int32_t main() {
         for(int i=1;i<=n;i++){
             
         }
-
-        
-
     }
     
     return 0;
