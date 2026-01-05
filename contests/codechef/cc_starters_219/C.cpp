@@ -50,28 +50,16 @@ void solve() {
   cin>>n;
   vector<int>v(n);
   for(auto &i:v) cin>>i;
-  if(v.size()==2){
-    int ans=v[0]+2*v[1];
-    cout<<ans<<" "<<ans<<endl;
-    return;
-  }
 
-  int ele=v[0]+2*v[1];
-  for(int i=2;i<n;i++){
-    int ele2=ele+2*v[i];
-    ele=ele2;
-  }
-
-  while(v.size()>1){
-    int ele1=v.back();
-    v.pop_back();
-    int ele2=v.back();
-    v.pop_back();
-    v.push_back(ele2+2*ele1);
-  }
+  int mini=v[0];
   int maxi=v[0];
 
-  cout<<ele<<" "<<maxi<<endl;
+  mini=v[0];
+  for(int i=1;i<n;i++){
+    mini+=(2*v[i]);
+    maxi+=(v[i]*(1<<i));
+  }
+  cout<<mini<<" "<<maxi<<endl;
 
 }
 

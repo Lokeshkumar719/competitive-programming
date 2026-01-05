@@ -50,15 +50,11 @@ void solve() {
   cin>>n;
   string s;
   cin>>s;
-  vector<int>v;
   int sum=0;
-  for(int i=0;i<n;i++){
-    sum+=((s[i]=='1')? 1:-1);
-    v.push_back(sum);
-  }
   int ans=0;
   for(int i=0;i<n;i++){
-    if(v[i]>=0) ans++;
+    sum+=((s[i]=='1')? 1:-1);
+    if(sum>=0) ans++;
   }
   cout<<ans<<endl;
 }

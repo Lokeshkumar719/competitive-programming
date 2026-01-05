@@ -44,21 +44,21 @@ bool isPrime(ll n) {
   return true;
 }
 
-// ---------- Write solution here ----------
-void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
-}
-
 // ---------- Main ----------
 int main() {
   fastio;
 
-  int t=1;
-  while (t--) {
-    solve();
+  int n;
+  cin>>n;
+  ll div_cnt1=1,div_sum=1,div_prod=1,div_cnt2=1;
+  while(n--){
+    ll p,k;
+    cin>>p>>k;  
+    div_sum=( (((div_sum%MOD) *(binpow(p,k+1)-1))%MOD) *(binpow(p-1,MOD-2))%MOD)%MOD;
+    div_prod=( (binpow(div_prod,k+1))*(binpow( binpow(p,(k*(k+1))/2),div_cnt2)) )%MOD;
+    div_cnt1=((div_cnt1%MOD)*(k+1)%MOD)%MOD;
+    div_cnt2=(((div_cnt2%(MOD-1))*(k+1)%(MOD-1))%(MOD-1));
   }
-
+  cout<<div_cnt1<<" "<<div_sum<<" "<<div_prod;
   return 0;
 }

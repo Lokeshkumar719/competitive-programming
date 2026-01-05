@@ -45,57 +45,53 @@ bool isPrime(ll n) {
 }
 
 // ---------- Write solution here ----------
-void solve() {
-  int n;
-  cin>>n;
-  if(n==2){
-    cout<<-1<<endl;
-    return;
-  } 
-  if(n==3){
-    vector<vector<int>>v(n,vector<int>(n,1));
-    v[1][0]=0;
-    v[2][0]=0;
-    for(int i=0;i<n;i++){
-      for(int j=0;j<n;j++){
-        cout<<v[i][j]<<" ";
-      }
-      cout<<endl;
-    }
-    return;
-  }
-  // something like this
-  // 1 1 1 1
-  // 1 0 1 1
-  // 1 0 0 1
-  // 1 1 1 1
+class Combinatorics {
+private:
+  ll MOD;
+  int MAXN;
+  vector<ll> fact, invfact;
 
-  vector<vector<int>>v(n,vector<int>(n,0));
-  for(int i=0;i<n;i++){
-    for(int j=0;j<n;j++){
-      if(i==0 || i==n-1 || j==0 || j==n-1){
-        v[i][j]=1;
-      }
+  ll binexp(ll a, ll b) {
+    ll res = 1;
+    while (b) {
+      if (b & 1) res = (res * a) % MOD;
+      a = (a * a) % MOD;
+      b >>= 1;
     }
+    return res;
   }
-  v[1][n-2]=1;
-  for(int i=0;i<n;i++){
-    for(int j=0;j<n;j++){
-      cout<<v[i][j]<<" ";
-    }
-    cout<<endl;
-  }
-}
 
+public:
+  // Constructor
+  Combinatorics(int maxn, ll mod) {
+    MAXN = maxn;
+    MOD = mod;
+    fact.resize(MAXN + 1);
+    invfact.resize(MAXN + 1);
+    precompute();
+  }
+
+  void precompute() {
+    fact[0] = 1;
+    for (int i = 1; i <= MAXN; i++)
+      fact[i] = (fact[i - 1] * i) % MOD;
+
+    invfact[MAXN] = binexp(fact[MAXN], MOD - 2);
+    for (int i = MAXN - 1; i >= 0; i--)
+      invfact[i] = (invfact[i + 1] * (i + 1)) % MOD;
+  }
+
+  ll nCr(ll n, ll r) {
+    if (r < 0 || r > n) return 0;
+    return fact[n] * invfact[r] % MOD * invfact[n - r] % MOD;
+  }
+};
 // ---------- Main ----------
 int main() {
   fastio;
-
-  int t;
-  cin >> t;
-  while (t--) {
-    solve();
-  }
-
+  Combinatorics combi(2*1e6+1,1e9+7);
+  int n,m;
+  cin>>n>>m;
+  cout<<combi.nCr(m+n-1,n-1)%MOD;
   return 0;
 }

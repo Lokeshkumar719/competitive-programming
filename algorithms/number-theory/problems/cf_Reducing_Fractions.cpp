@@ -44,21 +44,11 @@ bool isPrime(ll n) {
   return true;
 }
 
-// ---------- Write solution here ----------
-void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
-}
-
 // ---------- Main ----------
 int main() {
   fastio;
-
-  int t=1;
-  while (t--) {
-    solve();
-  }
+  
+  
 
   return 0;
 }

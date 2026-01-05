@@ -46,9 +46,10 @@ bool isPrime(ll n) {
 
 // ---------- Write solution here ----------
 void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
+  ll n;
+  cin>>n;
+  ll ans=(1LL<<(n+1))-2;
+  cout<<ans;
 }
 
 // ---------- Main ----------

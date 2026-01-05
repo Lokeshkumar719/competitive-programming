@@ -46,9 +46,19 @@ bool isPrime(ll n) {
 
 // ---------- Write solution here ----------
 void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
+  ll n;
+  cin>>n;
+  if(n&1){
+    cout<<0<<endl;
+    return;
+  }
+  ll m=n/2;
+  ll ans=0;
+  // every 5th has a 5 , every 25th has a 5^2 ,every 125th number has 5^3
+  for(ll i=5;i<=m;i*=5){
+    ans+=(m/i);
+  }
+  cout<<ans<<endl;
 }
 
 // ---------- Main ----------

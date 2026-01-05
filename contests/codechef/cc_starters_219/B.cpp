@@ -46,7 +46,18 @@ bool isPrime(ll n) {
 
 // ---------- Write solution here ----------
 void solve() {
+  int a,b;
+  cin>>a>>b;
+  double x=(double)a/100;
+  double y=(double)b/225;
   
+  if(x>y){
+    cout<<"Large"<<endl;
+  }else if(x<y){
+    cout<<"Small"<<endl;
+  }else{
+    cout<<"Equal"<<endl;
+  }
 }
 
 // ---------- Main ----------

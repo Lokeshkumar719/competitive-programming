@@ -45,10 +45,23 @@ bool isPrime(ll n) {
 }
 
 // ---------- Write solution here ----------
+const ll mod=998244353;
 void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
+  int n;
+  cin>>n;
+  vector<int>v(n);
+  map<int,int>mp;
+  for(int i=0;i<n;i++){
+    cin>>v[i];
+    mp[v[i]]=i;
+  }
+  int idx=0;
+  ll ans=1;
+  for(int i=0;i<n-1;i++){
+    idx=max(idx,mp[v[i]]);
+    if(idx==i) ans=((ans%mod)*(2%mod))%mod;
+  }
+  cout<<ans<<endl;
 }
 
 // ---------- Main ----------

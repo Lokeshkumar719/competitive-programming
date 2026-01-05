@@ -46,16 +46,33 @@ bool isPrime(ll n) {
 
 // ---------- Write solution here ----------
 void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
+  int n;
+  cin>>n;
+  string s;
+  cin>>s;
+  // Claim:In the most optimal solution we will never have a bad prefic before a good prefix
+  // so if answer is K then the first K prefixies will be good
+  // maximum number of good prefixes that we can obtian is min(2*(number of ones),length of string)
+  vector<int>posOne;
+  for(int i=0;i<n;i++){
+    if(s[i]=='1') posOne.push_back(i);
+  }
+  ll ans=0;
+  ll maxi=(ll)min(2*(int)posOne.size(),n);
+  for(int i=0;i<posOne.size();i++){
+    if(posOne[i]>=2*i){
+      ans+=((ll)posOne[i]-(ll)2*(ll)i);
+    }
+  }
+  cout<<maxi<<" "<<ans<<endl;
 }
 
 // ---------- Main ----------
 int main() {
   fastio;
 
-  int t=1;
+  int t;
+  cin >> t;
   while (t--) {
     solve();
   }

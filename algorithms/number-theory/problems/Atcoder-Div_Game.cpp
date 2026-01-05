@@ -46,9 +46,24 @@ bool isPrime(ll n) {
 
 // ---------- Write solution here ----------
 void solve() {
-  int n,m;
-  cin>>n>>m;
-  cout<<min(m-n,n)<<endl;
+  ll n;
+  cin>>n;
+  ll ans=0;
+  for(ll i=2;i*i<=n;i++){
+    if(n%i==0){
+      ll cnt=0;
+      while(n%i==0){
+        n/=i;
+        cnt++;
+      }
+      // n(n+1)=2*cnt;
+      // as we will divide by p^1 p^2 p^3 so sum of powers should be equal to the frequency of power
+      ll moves=(-1+sqrt(1+8*cnt))/2;
+      ans+=moves;
+    }
+  }
+  if(n>1) ans+=1;
+  cout<<ans<<endl;
 }
 
 // ---------- Main ----------
