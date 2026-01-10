@@ -31,7 +31,6 @@ void solve() {
             prev[price]=max(pick,notPick);
         }
     }
-
     cout<<prev[x]%mod;
 }
 int32_t main() {
