@@ -24,6 +24,6 @@ cp31_ladder/     → CP31 structured ladder
 - Prepare for coding interviews and contests
 
 ## Stats
-- Solved 700+ problems across platforms
-- Active on Codeforces & LeetCode
+- Solved 850+ problems across platforms
+- Active on Codeforces,codechef and leetcode
 
