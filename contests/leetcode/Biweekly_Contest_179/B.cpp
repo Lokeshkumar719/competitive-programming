@@ -1,8 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
-using ll = long long;
-
 class Combinatorics {
+using ll=long long;
 public:
   ll MOD;
   int MAXN;
@@ -43,6 +40,15 @@ public:
   }
 };
 
-int main(){
-  
-}
+
+class Solution {
+using ll=long long;
+ll mod=1e9+7;
+public:
+    int countVisiblePeople(int n, int pos, int k) {
+        Combinatorics combi((ll)n+1,1e9+7);
+        ll ans=combi.nCr(n-1,k);
+        ans=(ans*2)%mod;
+        return ans;
+    }
+};
