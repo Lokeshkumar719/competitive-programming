@@ -21,6 +21,55 @@ const int MOD = 1e9 + 7;
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> pbds;
 // pbds s; s.find_by_order(k) → k-th element; s.order_of_key(x) → rank of x
 
+// ---------- DSU ----------
+class DSU{
+private:
+  vector<int>parent,size;
+public:
+  DSU(int n){
+    parent.resize(n+1);
+    size.resize(n+1,1);
+
+    for(int i=0;i<=n;i++){
+      parent[i]=i;
+    }
+  }
+
+  int findUPar(int node){
+    if(node==parent[node]){
+      return node;
+    }
+
+    return parent[node]=findUPar(parent[node]);
+  }
+
+  void unionBySize(int u,int v){
+    int pu=findUPar(u);
+    int pv=findUPar(v);
+
+    if(pu==pv){
+      return;
+    }
+
+    if(size[pu]<size[pv]){
+      parent[pu]=pv;
+      size[pv]+=size[pu];
+    }
+    else{
+      parent[pv]=pu;
+      size[pu]+=size[pv];
+    }
+  }
+
+  bool sameComponent(int u,int v){
+    return findUPar(u)==findUPar(v);
+  }
+
+  int componentSize(int node){
+    return size[findUPar(node)];
+  }
+};
+
 // ---------- Utility functions ----------
 ll gcd(ll a, ll b){
   return b==0?a:gcd(b,a%b);
@@ -53,25 +102,27 @@ bool isPrime(ll n){
 
 // ---------- Write solution here ----------
 void solve(){
-  ll n;
-  cin>>n;
-  vll v(n);
-  for(auto &i:v) cin>>i;
-  int ans=0;
-  // it's a pascal triangle pattern last element appears n-1 choose i times and 
-  // n choose r is odd if ((n-r)&r)==0
-  for(int i=0;i<n;i++){
-    if((i&(n-1-i))==0){
-      ans ^= v[i];
+  int n,m,k;
+  cin>>n>>m>>k;
+  DSU dsu(n);
+  for(int i=0;i<=n-k;i++){
+    int l=i,r=i+k-1;
+    while(l<=r){
+      dsu.unionBySize(l,r);
+      l++;r--;
     }
   }
-  cout<<ans<<endl;
+  int num_compo=0;
+  for(int i=0;i<n;i++){
+    if(dsu.findUPar(i)==i) num_compo++;
+  }
+  cout<<binpow(m,num_compo)<<endl;
 }
+
 // ---------- Main ----------
 int main(){
   fastio;
-  int t;
-  cin>>t;
+  int t=1;
   while(t--){
     solve();
   }

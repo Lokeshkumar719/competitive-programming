@@ -56,22 +56,27 @@ void solve(){
   int n;
   cin>>n;
   vi v(n);
-  int a=0,b=0;
+  int neg=0,pos=0;
   for (int i = 0;i<n;i++) {
     cin>>v[i];
-    if (v[i]==-1)a++;
-    else if (v[i]==1)b++;
+    if (v[i]==-1)neg++;
+    else if (v[i]==1)pos++;
   }
-  int max_val=(b == 0)? min(a,1):min(a - 1,1);
-  int min_val=(a == 0)? max(-b,-1):max(1 - b,-1);
-  vector<int>ans;
-  for(int val = -1;val <= 1;val++){
-    if(val>= min_val && val<= max_val){
-      ans.push_back(val);
+  if(!neg && !pos){
+    cout<<0<<endl;
+  }else if(neg==0){
+    cout<<-1<<endl;
+  }else if(pos==0){
+    cout<<1<<endl;
+  }else{
+    if(pos>1){
+      cout<<-1<<" ";
+    }
+    cout<<0<<endl;
+    if(neg>1){
+      cout<<1<<endl;
     }
   }
-  for(auto &i:ans)cout<<i<<" ";
-  cout << endl;
 }
 // ---------- Main ----------
 int main(){
