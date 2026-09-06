@@ -1,37 +1,43 @@
 class Solution {
 public:
-    vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
-        int n = nums.size();
-
-        vector<int> vec = nums;
-        sort(begin(vec), end(vec));
-
-        int groupNum = 0;
-        unordered_map<int, int> numToGroup;
-        numToGroup[vec[0]] = groupNum;
-
-        unordered_map<int, queue<int>> groupToList;
-        groupToList[groupNum].push(vec[0]);
-
-        for (int i = 1; i < n; i++) {
-            if (abs(vec[i] - vec[i - 1]) > limit) {
-                groupNum += 1;
+    void addOthers(vector<int>&cnt,string &ans){
+        for(int i=0;i<26;i++){
+            if(!cnt[i]) continue;
+            for(int j=0;j<cnt[i];j++){
+                ans.push_back(i+'a');
             }
-
-            numToGroup[vec[i]] = groupNum;
-            groupToList[groupNum].push(vec[i]);
         }
-
-        vector<int> result(n);
-        for (int i = 0; i < n; i++) {
-            int num = nums[i];
-            int group = numToGroup[num];
-            // smallest available number in this group
-            result[i] =
-                groupToList[group].front(); // use hogaya to delete kardo elemen ko
-            groupToList[group].pop();
+    }
+    bool solve(string &target,int idx,string &ans,vector<int>&cnt){
+        if(idx == target.length()){
+            return false;
         }
-
-        return result;
+        char ch = target[idx];
+        if(cnt[ch-'a']){
+            ans.push_back(ch);
+            cnt[ch-'a']--;
+            if(solve(target,idx+1,ans,cnt)) return true;
+            ans.pop_back();
+            cnt[ch-'a']++;
+        }
+        for(char letter=(char)(ch+1);letter<='z';letter++){
+            if(cnt[letter-'a']){
+                ans.push_back(letter);
+                cnt[letter-'a']--;
+                addOthers(cnt,ans);
+                return true;
+            }
+        }
+        return false;
+    }
+    string lexGreaterPermutation(string s, string target) {
+        int n=s.size();
+        vector<int>cnt(26,0);
+        for(auto &ch:s){
+            cnt[ch-'a']++;
+        }
+        string ans;
+        solve(target,0,ans,cnt);
+        return ans;
     }
 };
