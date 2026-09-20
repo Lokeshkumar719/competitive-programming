@@ -1,0 +1,7 @@
+1. in exact type of questions like exactly k different integers 
+use atmost(k) - atmost(k-1)
+and a helper function for atmost 
+in this helper you will se something like ans += (j-i+1);
+
+
+
